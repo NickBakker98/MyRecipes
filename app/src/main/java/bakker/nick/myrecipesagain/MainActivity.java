@@ -86,17 +86,13 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
+                // We only want to see the first 3 recipes
                 int count = recipes.getCount();
-                for (int i=0; i<3; i++) {
+                if (count > 3) count = 3;
+                for (int i=0; i<count; i++) {
                     recepten.add(recipes.getRecipes().get(i));
                 }
-                count = recepten.size();
-                String tmp1 = recepten.get(0).getTitle();
-                String tmp2 = recepten.get(0).getImageUrl();
-                String tmp3 = recepten.get(1).getTitle();
-                String tmp4 = recepten.get(1).getImageUrl();
-                String tmp5 = recepten.get(2).getTitle();
-                String tmp6 = recepten.get(2).getImageUrl();
+
             }
             @Override
             public void onFailure(Call<RecipeList> call, Throwable t) {
@@ -155,13 +151,21 @@ public class MainActivity extends AppCompatActivity {
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+            // Now let's add the contents of our ArrayList in the fragments
+            // Use Glide to get the image from the imageUrl
             ImageView imageView = rootView.findViewById(R.id.recipe_imageView);
-
-            int count = recepten.size();
-
             Glide.with(rootView).load(recepten.get(getArguments().getInt(ARG_SECTION_NUMBER)).getImageUrl()).into(imageView);
+
+            // Now add the title of the recipe
             TextView textView = (TextView) rootView.findViewById(R.id.recipe_textView);
             textView.setText(recepten.get(getArguments().getInt(ARG_SECTION_NUMBER)).getTitle());
+
+            // some listView for the ingredients must be added
+            // List<String> ingredients = new ArrayList<>();
+            // ingredients = recepten.get(getArguments().getInt(ARG_SECTION_NUMBER)).getIngredients();
+            // and now add this list to some listView
+            // not sure if you need an adapter for that
 
             return rootView;
         }
