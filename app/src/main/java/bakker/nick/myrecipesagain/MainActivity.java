@@ -34,17 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-
-// display 3 recipes from a Recipe API
-// don't forget to add some depencies
-// implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-//    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-//    implementation 'com.github.bumptech.glide:glide:4.7.1'
-//    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
-//
-// and don't forget to allow internet accesa in you manifest file
-//     <uses-permission android:name="android.permission.INTERNET" />
-
+    //Creating variables.
     private SectionsPagerAdapter mSectionsPagerAdapter;
     private ViewPager mViewPager;
     private static final List<Recipe> recepten = new ArrayList<>();
@@ -160,12 +150,6 @@ public class MainActivity extends AppCompatActivity {
             // Now add the title of the recipe
             TextView textView = (TextView) rootView.findViewById(R.id.recipe_textView);
             textView.setText(recepten.get(getArguments().getInt(ARG_SECTION_NUMBER)).getTitle());
-
-            // some listView for the ingredients must be added
-            // List<String> ingredients = new ArrayList<>();
-            // ingredients = recepten.get(getArguments().getInt(ARG_SECTION_NUMBER)).getIngredients();
-            // and now add this list to some listView
-            // not sure if you need an adapter for that
 
             return rootView;
         }
